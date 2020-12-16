@@ -1,11 +1,12 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const bodyParser = require('body-parser')
 const router = require('./routes/routes')
 
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/dist", express.static(path.resolve(__dirname, "../dist")));
 
 app.use('/api', router);
 
