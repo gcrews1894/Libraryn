@@ -1,11 +1,14 @@
 .sidebar__buttons {
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   height: 65%;
   button {
     width: 5rem;
     height: 5rem;
     outline: none;
+  }
+  .sidebar__form{
+
   }
 }

@@ -3,40 +3,39 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function MainArea() {
-  const [items, setItems] = useState([
-    { title: 'Haryy Potter', author: 'jk rowling', borrower: 'Gavin', condition: 'good' },
-    { title: 'Of Mice and Men', author: 'John Steinbeck', borrower: 'Sean', condition: 'bad' },
-    {
-      title: 'A Farewell to Arms',
-      author: 'Ernest Hemingway',
-      borrower: 'Taylor',
-      condition: 'Excellent',
-    },
-  ]);
+function MainArea({ setUserState, userState }) {
   const [selected, setSelected] = useState();
 
-  function getDetails() {
-    const options = { method: 'GET', url: `http://localhost:3000/api/details/${selected}` };
+  useEffect(() => {
+    const options = { method: 'GET', url: 'http://localhost:8080/api/getlibrary' };
     axios
       .request(options)
-      .then(function (response) {
-        setItems(response);
+      .then(function (res) {
+        setUserState((state) => ({ ...state, books: res.data }));
       })
       .catch(function (error) {
         console.error(error);
       });
-  }
+  }, []);
 
-  const list = items.map((row) => {
+
+  const list = userState.books.map((row) => {
     return (
       <li
         key={row.title}
         id={row.title}
         className={`${selected === `${row.title}` ? 'listItem flex selected' : 'listItem flex'}`}
-        onClick={(e) => {
-          setSelected(e.target.parentElement.id);
-          getDetails(e.target.parentElement.id);
+        onClick={() => {
+          setSelected(row.title);
+          setUserState((prevState) => ({
+            ...prevState,
+            selectedBook: {
+              title: row.title,
+              author: row.author,
+              borrower: row.borrower,
+              condition: row.condition,
+            },
+          }));
         }}>
         <span>{row.title}</span>
         <span>{row.author}</span>
@@ -45,10 +44,18 @@ function MainArea() {
       </li>
     );
   });
-  
+
   return (
     <div className="library__mainArea flex">
-      <ul className="flex">{list}</ul>
+      <ul className="flex">
+        <li key="default" id="default" className="listItem header flex">
+          <span>Title</span>
+          <span>Author</span>
+          <span>Borrower</span>
+          <span>Condition</span>
+        </li>
+        {list || null}
+      </ul>
     </div>
   );
 }

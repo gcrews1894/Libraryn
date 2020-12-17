@@ -1,8 +1,9 @@
 const express = require("express");
+
 const app = express();
 const path = require("path");
+const cookieParser = require('cookie-parser');
 const router = require("./routes/routes");
-const cookieParser = require("cookie-parser");
 
 app.use(cookieParser());
 app.use(express.json());

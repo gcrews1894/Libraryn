@@ -10,39 +10,42 @@ function App() {
   const [userState, setUserState] = useState({
     isLoggedIn: false,
     login: '',
+    books: [],
+    selectedBook: '',
   });
 
-  function LOGIN(data) {
-    setUserState(data);
+  function LOGIN() {
+    setUserState((state) => ({
+      ...state,
+      isLoggedIn: true,
+    }));
   }
 
-  function LOGOUT() {
-    setUserState({
-      isLoggedIn: false,
-      login: '',
-    });
-  }
-
+  const options = {
+    method: 'GET',
+    url: 'http://localhost:8080/api/',
+  };
   useEffect(() => {
     axios
-      .get('/api/auth/verify')
-      .then(({ data }) => {
-        if (!data.isLoggedIn) {
-          return LOGOUT();
-        }
-        return LOGIN(data);
+      .request(options)
+      .then(function (response) {
+        LOGIN();
+
+        console.log(response);
       })
-      .catch((err) => console.log(err));
+      .catch(function (error) {
+        console.error(error);
+      });
   }, []);
 
   if (userState.isLoggedIn === false) {
-    return <Login />;
+    return <Login LOGIN={LOGIN} />;
   }
   return (
     <div className="grid-container">
-      <Details />
-      <Library />
-      <Sidebar />
+      <Details userState={userState} />
+      <Library setUserState={setUserState} userState={userState} />
+      <Sidebar setUserState={setUserState} />
     </div>
   );
 }

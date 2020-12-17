@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import SidebarButtons from '../components/sidebar/SidebarButtons';
 
-function Sidebar() {
+function Sidebar({setUserState}) {
   return (
     <main className="sidebar__container">
-      <SidebarButtons />
+      <SidebarButtons setUserState={setUserState} />
     </main>
   );
 }

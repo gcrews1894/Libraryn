@@ -9,9 +9,9 @@ const libraryController = {};
 
 libraryController.addLibrary = (req, res, next) => {
   console.log("beginning new library entry");
-  const { user_id, borrower, condition } = req.body;
-  // const { user_id } = req.cookie;
-  console.log("these are cookies", req.cookie);
+  const { borrower, condition } = req.body;
+  const { user_id } = req.cookies;
+  console.log("these are cookies", req.cookies);
   const { _id } = res.locals.book;
   console.log(_id);
   const params = [user_id, _id, borrower, condition];
@@ -44,15 +44,11 @@ libraryController.addLibrary = (req, res, next) => {
 // }
 
 libraryController.getLibrary = (req, res, next) => {
-  console.log("in get Library");
-  const { user_id } = req.body;
-  console.log(req.body);
+  const { user_id } = req.cookies;
   const params = [user_id];
   db.query(fetchLibrary, params)
     .then((data) => {
       res.locals.library = data.rows;
-      console.log(data.rows);
-      console.log("got new library!");
       next();
     })
     .catch((e) => {
