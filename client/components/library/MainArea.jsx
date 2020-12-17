@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function MainArea() {
+function MainArea({ setUserState }) {
   const [items, setItems] = useState([
     { title: 'Haryy Potter', author: 'jk rowling', borrower: 'Gavin', condition: 'good' },
     { title: 'Of Mice and Men', author: 'John Steinbeck', borrower: 'Sean', condition: 'bad' },
@@ -16,8 +16,8 @@ function MainArea() {
   ]);
   const [selected, setSelected] = useState();
 
-  function getDetails() {
-    const options = { method: 'GET', url: `http://localhost:3000/api/details/${selected}` };
+  useEffect(() => {
+    const options = { method: 'GET', url: `http://localhost:3000/api/library/` };
     axios
       .request(options)
       .then(function (response) {
@@ -26,7 +26,7 @@ function MainArea() {
       .catch(function (error) {
         console.error(error);
       });
-  }
+  }, []);
 
   const list = items.map((row) => {
     return (
@@ -36,7 +36,11 @@ function MainArea() {
         className={`${selected === `${row.title}` ? 'listItem flex selected' : 'listItem flex'}`}
         onClick={(e) => {
           setSelected(e.target.parentElement.id);
-          getDetails(e.target.parentElement.id);
+          setUserState((prevState) => ({
+            ...prevState,
+            selectedBook: e.target.parentElement.id,
+          }));
+          // getInfo(e.target.parentElement.id);
         }}>
         <span>{row.title}</span>
         <span>{row.author}</span>
@@ -45,7 +49,7 @@ function MainArea() {
       </li>
     );
   });
-  
+
   return (
     <div className="library__mainArea flex">
       <ul className="flex">{list}</ul>

@@ -10,6 +10,8 @@ function App() {
   const [userState, setUserState] = useState({
     isLoggedIn: false,
     login: '',
+    books: [],
+    selectedBook: '',
   });
 
   function LOGIN(data) {
@@ -23,25 +25,25 @@ function App() {
     });
   }
 
-  useEffect(() => {
-    axios
-      .get('/api/auth/verify')
-      .then(({ data }) => {
-        if (!data.isLoggedIn) {
-          return LOGOUT();
-        }
-        return LOGIN(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get('/api/auth/verify')
+  //     .then(({ data }) => {
+  //       if (!data.isLoggedIn) {
+  //         return LOGOUT();
+  //       }
+  //       return LOGIN(data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
-  if (userState.isLoggedIn === false) {
-    return <Login />;
-  }
+  // if (userState.isLoggedIn === false) {
+  //   return <Login />;
+  // }
   return (
     <div className="grid-container">
-      <Details />
-      <Library />
+      <Details userState={userState} />
+      <Library setUserState={setUserState} />
       <Sidebar />
     </div>
   );
