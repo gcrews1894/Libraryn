@@ -14,37 +14,38 @@ function App() {
     selectedBook: '',
   });
 
-  function LOGIN(data) {
-    setUserState(data);
+  function LOGIN() {
+    setUserState((state) => ({
+      ...state,
+      isLoggedIn: true,
+    }));
   }
 
-  function LOGOUT() {
-    setUserState({
-      isLoggedIn: false,
-      login: '',
-    });
+  const options = {
+    method: 'GET',
+    url: 'http://localhost:8080/api/',
+  };
+  useEffect(() => {
+    axios
+      .request(options)
+      .then(function (response) {
+        LOGIN();
+
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, []);
+
+  if (userState.isLoggedIn === false) {
+    return <Login LOGIN={LOGIN} />;
   }
-
-  // useEffect(() => {
-  //   axios
-  //     .get('/api/auth/verify')
-  //     .then(({ data }) => {
-  //       if (!data.isLoggedIn) {
-  //         return LOGOUT();
-  //       }
-  //       return LOGIN(data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
-  // if (userState.isLoggedIn === false) {
-  //   return <Login />;
-  // }
   return (
     <div className="grid-container">
       <Details userState={userState} />
-      <Library setUserState={setUserState} />
-      <Sidebar />
+      <Library setUserState={setUserState} userState={userState} />
+      <Sidebar setUserState={setUserState} />
     </div>
   );
 }

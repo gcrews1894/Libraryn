@@ -52,6 +52,9 @@
     .selected {
       border: 2px solid rgb(82, 82, 82);
     }
+    .header {
+      border-bottom: 2px solid black;
+    }
   }
   ::-webkit-scrollbar {
     width: 0px;

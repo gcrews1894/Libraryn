@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function SidebarButtons() {
+function SidebarButtons({ setUserState }) {
   const [adding, setAdding] = useState(false);
   const [formState, setFormState] = useState({
     title: '',
@@ -19,7 +19,7 @@ function SidebarButtons() {
 
   function send(e) {
     e.preventDefault();
-    setAdding(false)
+    setAdding(false);
     const options = {
       method: 'POST',
       url: 'http://localhost:8080/api/book',
@@ -29,7 +29,7 @@ function SidebarButtons() {
     axios
       .request(options)
       .then(function (response) {
-        // setBookInfo(response);
+        setUserState((state) => ({...state,  books: [...state.books, formState] }));
         console.log(response);
       })
       .catch(function (error) {

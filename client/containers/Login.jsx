@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-function Login() {
+function Login({ LOGIN }) {
   function handleSubmit(e) {
     e.preventDefault();
     const user = e.target[0].value;
@@ -16,7 +16,8 @@ function Login() {
     axios
       .request(options)
       .then(function (response) {
-        // setBookInfo(response);
+        if (response.data.display_name) LOGIN();
+
         console.log(response);
       })
       .catch(function (error) {

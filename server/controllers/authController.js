@@ -2,11 +2,14 @@ const authController = {};
 
 // eslint-disable-next-line no-undef
 authController.setCookie = (req, res, next) => {
-  console.log("I am in setCookie, res.locals: ", res.locals.user);
-  const user_id = res.locals.user._id;
-  console.log("user id is:", user_id);
-  res.cookie("user_id", user_id);
-  console.log("finished cookie", req.cookie);
+  const cookie = req.cookies.user_id;
+  if (cookie === undefined) {
+    // no cookie
+    const user_id = res.locals.user._id;
+    res.cookie("user_id", user_id, { maxAge: 5000000, httpOnly: true });
+  } else {
+    console.log("cookie exists", cookie);
+  }
   return next();
 };
 

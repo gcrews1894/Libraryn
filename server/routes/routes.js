@@ -27,8 +27,5 @@ router.get("/getlibrary", libraryController.getLibrary, (req, res) =>
   res.status(200).json(res.locals.library)
 );
 
-router.get("/", libraryController.getLibrary, (req, res) =>
-  res.status(200).json(res.locals.library)
-);
 
 module.exports = router;
