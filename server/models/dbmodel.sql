@@ -17,7 +17,7 @@ CREATE TABLE books(
 
 CREATE TABLE libraries(
     user_id int NOT NULL, 
-    book_id int NOT NULL, 
+    book_id int NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (_id), 
     FOREIGN KEY (book_id) REFERENCES books (_id)
 );

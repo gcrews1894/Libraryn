@@ -6,6 +6,7 @@ const router = require('./routes/routes')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 app.use("/dist", express.static(path.resolve(__dirname, "../dist")));
 
 app.use('/api', router);
