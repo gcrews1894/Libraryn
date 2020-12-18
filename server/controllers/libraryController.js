@@ -4,6 +4,9 @@ const fetchLibrary = `SELECT * FROM libraries l INNER JOIN users u ON u._id = l.
 
 const addBook = `INSERT INTO books(title, author) VALUES ($1, $2);`;
 const addToLibrary = `INSERT INTO libraries(user_id, book_id, borrower, condition) VALUES ($1, $2, $3, $4);`;
+const deleteBook = `DELETE FROM books WHERE user_id = $1 AND book_id = $2`;
+const updateBorrower = `UPDATE libraries SET borrower = $1 WHERE user_id = $2 AND book_id = $3`;
+const updateCondition = `UPDATE libraries SET condition = $1 WHERE user_id = $2 AND book_id = $3`;
 
 const libraryController = {};
 
@@ -26,23 +29,6 @@ libraryController.addLibrary = (req, res, next) => {
     });
 };
 
-// libraryController.addBookToLibrary = (req, res, next) => {
-//   const { user_id, title, author, borrower, condition } = req.body;
-//   const book_id = null
-//   console.log(req.body);
-//   const params1 = [ title, author ];
-//   db
-//     .query(addBook, params1)
-//     .then((data) => {
-//       console.log(data.rows)
-//       book_id = data.rows[0].book_id
-//       libraryController.addLibrary(req, res, next) {
-
-//       }
-//     })
-//     .catch((e) => next(e))
-// }
-
 libraryController.getLibrary = (req, res, next) => {
   const { user_id } = req.cookies;
   const params = [user_id];
@@ -53,6 +39,48 @@ libraryController.getLibrary = (req, res, next) => {
     })
     .catch((e) => {
       next(e);
+    });
+};
+
+libraryController.deleteFromLibrary = (req, res, next) => {
+  const { book_id } = req.body;
+  const user_id = req.cookies.user_id;
+  const params = [user_id, book_id];
+  db.query(deleteBook, params)
+    .then((data) => {
+      console.log(data);
+      return next();
+    })
+    .catch((e) => {
+      return next(e);
+    });
+};
+
+libraryController.changeBorrower = (req, res, next) => {
+  const { book_id, borrower } = req.body;
+  const user_id = req.cookies.user_id;
+  const params = [borrower, user_id, book_id];
+  db.query(updateBorrower, params)
+    .then((data) => {
+      console.log(data);
+      return next();
+    })
+    .catch((e) => {
+      return next(e);
+    });
+};
+
+libraryController.changeCondition = (req, res, next) => {
+  const { book_id, condition } = req.body;
+  const user_id = req.cookies.user_id;
+  const params = [condition, user_id, book_id];
+  db.query(updateCondition, params)
+    .then((data) => {
+      console.log(data);
+      return next();
+    })
+    .catch((e) => {
+      return next(e);
     });
 };
 

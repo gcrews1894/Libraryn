@@ -27,5 +27,16 @@ router.get("/getlibrary", libraryController.getLibrary, (req, res) =>
   res.status(200).json(res.locals.library)
 );
 
+router.delete("/delete", libraryController.deleteFromLibrary, (req, res) => {
+  res.status(200).json(res.locals.library);
+});
+
+router.post("/condition", libraryController.changeCondition, (req, res) => {
+  res.status(200).json(res.locals.library);
+});
+
+router.post("/borrower", libraryController.changeBorrower, (req, res) => {
+  res.status(200).json(res.locals.library);
+});
 
 module.exports = router;

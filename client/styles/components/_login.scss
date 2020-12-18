@@ -1,0 +1,91 @@
+@import 'colors';
+
+.Login {
+  width: 100vw;
+  height: 100vh;
+  .backgroundImage {
+    width: 100vw;
+    height: auto;
+    position: absolute;
+  }
+  .loginHeader {
+    font-size: 60px;
+    font-weight: 400;
+    color: $primary300;
+    margin-bottom: 0;
+    width: 40vw;
+    height: 30%;
+  }
+  .loginForm {
+    height: 40%;
+    display: flex;
+    border-radius: 3em;
+    // background: transparentize($primary100, 0.7);
+    .signinForm {
+      border-right: 1px solid $primary100;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2em;
+      width: 60%;
+      height: 100%;
+      padding-top: 1em;
+      .subtitle {
+        font-size: 12px !important;
+        color: $primary200;
+      }
+      .logininput {
+        margin-bottom: 1em;
+        width: 100%;
+        font-size: 18px;
+        border-radius: 1em;
+        border: 1px solid $neutral200;
+        background: $neutral100;
+        padding: 0.25em 0.5em;
+      }
+    }
+    .createform {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      border-left: 1px solid $primary100;
+      padding: 1em;
+    }
+    .containertext {
+      color: $primary300;
+      margin-top: 0;
+      font-size: 28px;
+    }
+    .buttondiv {
+      width: 100%;
+      height: 40%;
+      display: flex;
+      justify-content: center;
+      .submitbutton {
+        height: 40%;
+        padding: 0.5em 2em;
+        border: none;
+        border-radius: 2em;
+        color: $neutral100;
+        font-size: 18px;
+        margin-top: 0em;
+        background-color: $attention300;
+      }
+      #submittop {
+        margin-top: 1em;
+      }
+    }
+    #createtext {
+      padding-top: 1em;
+    }
+  }
+  .frontForm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    width: 50vw;
+    height: 100vh;
+    float: right;
+    margin-right: 2em;
+  }
+}
