@@ -74,7 +74,7 @@ function Login({ LOGIN }) {
           </form>
           <div className="bttn style createform">
             <p className="containertext" id="createtext">
-              Create an account
+              Don't have an account? <br></br> Click here!
             </p>
             <div className="buttondiv">
               <button className="submitbutton create" onClick={() => setIsVis(true)} type="button">

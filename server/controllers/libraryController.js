@@ -4,7 +4,7 @@ const fetchLibrary = `SELECT * FROM libraries l INNER JOIN users u ON u._id = l.
 
 const addBook = `INSERT INTO books(title, author) VALUES ($1, $2);`;
 const addToLibrary = `INSERT INTO libraries(user_id, book_id, borrower, condition) VALUES ($1, $2, $3, $4);`;
-const deleteBook = `DELETE FROM books WHERE user_id = $1 AND book_id = $2`;
+const deleteBook = `DELETE FROM libraries WHERE user_id = $1 AND book_id = $2`;
 const updateBorrower = `UPDATE libraries SET borrower = $1 WHERE user_id = $2 AND book_id = $3`;
 const updateCondition = `UPDATE libraries SET condition = $1 WHERE user_id = $2 AND book_id = $3`;
 
