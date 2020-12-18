@@ -9,10 +9,11 @@
     position: absolute;
   }
   .loginHeader {
-    font-size: 60px;
+    font-size: 48px;
     font-weight: 400;
     color: $primary300;
     margin-bottom: 0;
+    margin-top: 0;
     width: 40vw;
     height: 30%;
   }
@@ -20,6 +21,7 @@
     height: 40%;
     display: flex;
     border-radius: 3em;
+    margin-top: 0 !important;
     // background: transparentize($primary100, 0.7);
     .signinForm {
       border-right: 1px solid $primary100;
@@ -88,5 +90,65 @@
     height: 100vh;
     float: right;
     margin-right: 2em;
+    .logoimg {
+      width: auto;
+      height: 15vh;
+      margin-top: 2em;
+      padding-bottom: 0;
+    }
+  }
+}
+.signupform {
+  display: flex;
+  border: 1px solid black;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+  .createcontent {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    .loginheader {
+      border: 1px solid black;
+      font-size: 48px;
+      font-weight: 400;
+      color: $primary300;
+      margin-bottom: 0;
+      margin-top: 0;
+      width: 40vw;
+      height: 40%;
+      h2 {
+        margin-top: 0 !important;
+      }
+    }
+    .createaccount {
+      border: 1px solid black;
+      height: 40vh;
+      width: 30vw;
+      .subtitle {
+        font-size: 12px !important;
+        color: $primary200;
+      }
+      .logininput {
+        margin-bottom: 1em;
+        width: 100%;
+        font-size: 18px;
+        border-radius: 1em;
+        border: 1px solid $neutral200;
+        background: $neutral100;
+        padding: 0.25em 0.5em;
+      }
+      .submitbutton {
+        height: 20%;
+        padding: 0.5em 2em;
+        border: none;
+        border-radius: 2em;
+        color: $neutral100;
+        font-size: 18px;
+        margin-top: 0em;
+        background-color: $attention300;
+      }
+    }
   }
 }

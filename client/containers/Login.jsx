@@ -52,6 +52,7 @@ function Login({ LOGIN }) {
         <img className="backgroundImage" src="client/assets/background_image_70.png"></img>
       </div>
       <div className="frontForm">
+        <img className="logoimg" src="client/assets/LibrarynLogo-02.png"></img>
         <h1 className="loginHeader">Managing your library is just a few clicks away!</h1>
         <div className="loginForm">
           <form className="signinForm" onSubmit={handleSubmit}>
@@ -86,19 +87,30 @@ function Login({ LOGIN }) {
       </div>
     </div>
   ) : (
-    <form>
-      <div className="Create form">
-        <label htmlFor="displayname">Displayname</label>
-        <input name="displayname" id="displayname" />
-        <label htmlFor="username">Username</label>
-        <input name="username" id="username" />
-        <label htmlFor="password">Password</label>
-        <input name="password" type="password" id="password" />
-        <button type="submit" onClick={createAccount}>
-          submit
-        </button>
+    <div className="signupform">
+      <div className="createcontent">
+        <div className="loginheader">
+          <h2>You're on your way to a better library</h2>
+        </div>
+        <form className="createaccount">
+          <label className="subtitle" htmlFor="displayname">
+            Displayname
+          </label>
+          <input className="logininput" name="displayname" id="displayname" />
+          <label className="subtitle" htmlFor="username">
+            Username
+          </label>
+          <input className="logininput" name="username" id="username" />
+          <label className="subtitle" htmlFor="password">
+            Password
+          </label>
+          <input className="logininput" name="password" type="password" id="password" />
+          <button className="submitbutton" type="submit" onClick={createAccount}>
+            submit
+          </button>
+        </form>
       </div>
-    </form>
+    </div>
   );
 }
 
